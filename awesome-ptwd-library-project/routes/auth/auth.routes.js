@@ -94,5 +94,9 @@ router.post('/login', (req, res, next) => {
   .catch(error => next(error));
 });
 
+// User Profile Page
+router.get('/userProfile', (req, res, next) => {
+  res.render('users/user-profile');
+});
 
 module.exports = router;
