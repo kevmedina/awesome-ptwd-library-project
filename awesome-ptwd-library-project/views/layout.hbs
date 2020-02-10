@@ -11,16 +11,16 @@
   <nav>
       <ul>
         <li id="to-left">
-          <p><a href="/"> Users - demo </a></p>
+          <p><a href="/"> Users - Ironhack </a></p>
         </li>
         <li id="to-right">
           {{#if user}}
-            <form action="/logout" method="POST">
+            <form action="/logout" method="GET">
               <button type="submit">Logout</button>
             </form>
           {{else}}
             <a href="/signup">Signup</a> <span> | </span>
-            <a href="/login">Login</a>
+            <a href="/login-form">Login</a>
           {{/if}}
         </li>
       </ul>

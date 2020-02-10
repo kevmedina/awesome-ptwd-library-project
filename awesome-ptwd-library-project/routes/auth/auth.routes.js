@@ -6,7 +6,7 @@ const saltRounds = 10;
 
 const User = require('../../models/User.model');
 
-// const routeGuard = require('../../configs/route-guard.config');
+const routeGuard = require('../../configs/route-guard.config');
 
 // Sign Up Page
 router.get('/signup', (req, res, next) => {
@@ -45,7 +45,7 @@ router.post('/signup', (req, res, next) => {
   })
   .then(userFromDB => {
     console.log(`Newly created user is: ${userFromDB}`);
-    res.redirect('/login');
+    res.redirect('/login-form');
   })
   .catch(error => {
     if (error instanceof mongoose.Error.ValidationError) {
@@ -62,7 +62,7 @@ router.post('/signup', (req, res, next) => {
 
 
 // Login Page
-router.get('/login', (req, res, next) => {
+router.get('/login-form', (req, res, next) => {
   res.render('auth/login');
 });
 
@@ -95,8 +95,15 @@ router.post('/login', (req, res, next) => {
 });
 
 // User Profile Page
-router.get('/userProfile', (req, res, next) => {
+router.get('/userProfile', routeGuard, (req, res, next) => {
   res.render('users/user-profile');
+});
+
+// Logout of profile
+router.get('/logout', (req, res, next) => {
+  req.session.destroy((err) => {
+    res.redirect('/login-form');
+  });
 });
 
 module.exports = router;
